@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Mission to Mars</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <style>
+            .jumbotron{
+                background-color: #ffffff!important;
+            }
+            
+            .jumbotron h1{
+                margin-bottom: 20px!important;
+            }
+
+            #mars-featured-image{
+                margin-top: 15px!important;
+                margin-bottom: 15px!important;
+            }
+
+            #mars-hemisphere-image .row{
+                margin-top: 15px!important;
+                margin-bottom: 15px!important;
+            }
+
+            .dataframe thead{
+                visibility: hidden;
+            }
+
+            .dataframe{
+                margin-top: -41px;
+            }
+
+            .table .dataframe tbody th{
+                text-align: center!important;
+                padding: 2px;
+            }
+
+            .table .dataframe tbody td{
+                text-align: center!important;
+                padding: 2px;
+            }
+
+        </style>
+    </head>
+    
+    <body>
+        <div class="container">
+                <div class="jumbotron text-center">
+                    <h1>Mission to Mars</h1>
+                    <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+                </div>
+                
+                <!-- Mars News -->
+                <div class="row" id="mars-news">
+                    <div class="col-sm-12 col-md-12">
+                        <div class="media">
+                            <div class="media-body">
+                                <h3>Latest Mars News</h3>
+                                <h4 class="media-heading">{{mars.news_title}}</h4>
+                                <p>{{mars.news_paragraph}}</p>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mars Featured Image --> 
+                <div class="row" id="mars-featured-image">
+                    <div class="col-sm-8 col-md-8">
+                        <h3>Featured Mars Image</h3>
+                        <img src="{{ mars.featured_image }}" class="img-responsive img-thumbnail" alt="Responsive image">
+                    </div>
+                    <!-- Mars Info -->
+                    <div class="col-sm-4 col-md-4">
+                        <h3>Mars Facts</h3>
+                        <div class="table">
+                            <span>{{mars.facts | safe}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mars Hemisphere Images --> 
+
+                {% if mars.hemisphere_images %}
+                <div id="mars-hemisphere-image"> 
+                    <div class="row" >
+                        <div class="col-sm-5 col-md-5">
+                            <h3>{{mars.hemisphere_images[0]['title']}}</h3>
+                            <img src="{{mars.hemisphere_images[0]['img_url']}}" class="img-responsive img-thumbnail" alt="Responsive image">
+                        </div>
+                        <div class="col-sm-offset-2 col-sm-5 col-md-offset-2 col-md-5">
+                            <h3>{{mars.hemisphere_images[1]['title']}}</h3>
+                            <img src="{{mars.hemisphere_images[1]['img_url']}}" class="img-responsive img-thumbnail" alt="Responsive image">
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-md-5">
+                            <h3>{{mars.hemisphere_images[2]['title']}}</h3>
+                            <img src="{{mars.hemisphere_images[2]['img_url']}}" class="img-responsive img-thumbnail" alt="Responsive image">
+                        </div>
+                        <div class="col-sm-offset-2 col-sm-5 col-md-offset-2 col-md-5">
+                            <h3>{{mars.hemisphere_images[3]['title']}}</h3>
+                            <img src="{{mars.hemisphere_images[3]['img_url']}}" class="img-responsive img-thumbnail" alt="Responsive image">
+                        </div>
+                    </div>
+                </div>   
+                {% else %}
+                <div>
+                    <h3>No hemispheres to show.</h3>
+                    <p>Click the button at the top of the page.</p>
+                </div>
+                {% endif %}
+        </div>
+    </body>
+</html>
